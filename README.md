@@ -1,1 +1,1 @@
-# web-push-package
+# web-push

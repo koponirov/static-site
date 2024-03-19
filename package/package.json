@@ -1,0 +1,11 @@
+{
+  "name": "web-push-package",
+  "version": "1.0.0",
+  "description": "Package for initializing push notification subscription",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "koponirov.m",
+  "license": "ISC"
+}
