@@ -1,0 +1,51 @@
+Firebase Cloud Messaging (FCM) предоставляет API для управления подписками на push-уведомления в веб-приложениях. Вот как вы можете подписывать и отписывать клиентов, используя FCM:
+
+Подписка клиентов:
+Для подписки клиента на получение push-уведомлений обычно вызывается метод subscribeToTopic в вашем клиентском JavaScript-коде. Этот метод позволяет клиенту подписываться на определенную тему или группу тем. Например:
+
+firebase.messaging().subscribeToTopic('news');
+Этот код подписывает клиента на тему "news", позволяя ему получать push-уведомления, опубликованные в этой теме.
+
+Отписка клиентов:
+Аналогично, чтобы отписать клиента от получения push-уведомлений, можно использовать метод unsubscribeFromTopic. Например:
+
+firebase.messaging().unsubscribeFromTopic('news');
+Этот код отписывает клиента от темы "news", прекращая получение push-уведомлений, опубликованных в этой теме.
+
+Управление токенами:
+Firebase Cloud Messaging использует уникальные регистрационные токены для идентификации и управления подписками для отдельных клиентов. Когда клиент подписывается на тему или регистрируется для получения push-уведомлений, Firebase генерирует уникальный регистрационный токен для этого клиента. Этот токен используется для отправки push-уведомлений на клиента.
+
+Обычно вам не нужно управлять токенами вручную, поскольку Firebase обрабатывает генерацию и управление токенами за вас. Однако при необходимости вы можете получить регистрационный токен для клиента с помощью метода getToken:
+
+firebase.messaging().getToken().then(function(token) {
+    console.log('Регистрационный токен:', token);
+}).catch(function(err) {
+    console.log('Не удалось получить регистрационный токен:', err);
+});
+Затем вы можете использовать этот токен для отправки целевых push-уведомлений на конкретного клиента.
+
+Аутентификация и правила безопасности:
+Firebase Cloud Messaging обеспечивает, чтобы только аутентифицированные клиенты могли подписываться на темы и получать push-уведомления. Вы можете наложить дополнительные правила безопасности и разрешения, используя аутентификацию Firebase и правила безопасности Cloud Firestore, чтобы контролировать, кто может подписываться на определенные темы и кто может отправлять push-уведомления.
+
+Используя эти методы и принципы, вы можете эффективно управлять подписками и push-уведомлениями в ваших веб-приложениях с помощью Firebase Cloud Messaging.
+
+
+curl -X POST -H "Authorization: key=YOUR-SERVER-KEY" -H "Content-Type: application/json" -d '{
+  "notification": {
+    "title": "Portugal vs. Denmark",
+    "body": "5 to 1",
+    "icon": "firebase-logo.png",
+    "click_action": "http://localhost:8081"
+  },
+  "to": "YOUR-IID-TOKEN"
+}' "https://fcm.googleapis.com/fcm/send"
+
+curl -X POST -H "Authorization: Bearer ya29.c.c0AY_VpZiQ3ZUKQ9FSG1tbRe8QMF5kMuzi6YAjanYZBOrm0d_raSSCqaAUleKzf6FKsytxj5zviuHZhVqSRP2r_lHy1t4EP2WLgJDwtUC6IhU7RugDVXf44lzbhnhtT-MS9Xj0KFQU0lHhJ36BXODImd5fhJySoHqrsOIEt8Oe5iMCT0knStoU8uksosaF6ipVjodfU3CXzXSdJgQHs7Z09Zgj69OS9nbLJjmtYJaa_pH6p_tlk58lsG8lCfE_EBdvIBwxQ9xFJyepmbuRrg8VtQVnUwYJy5Qx5LAbaQS8yUm0NgVYAVHLn5QPgmL3dC9fZfSNM7hK8DU3XZ_LzVLrxFN5Lm39Fav4h78ItxvQwsCzmXZfpTcI9jxqH385A5QqooRyIjRi62e_fqz6SdMyzj2bYBUVtewtQ58n7MVxFt9l0JcOVpcSxr40-_SBWbUqy5WmY9emdvrJiY24IR8ZffjWa5qfF-er-0vp78qi2hitVyQq_dFJUWyQOb1oRMUjc9tMgOi0u034aXl46gw69MscqZMs_X4nZt6oVzJJ2OdftXvIl-iIp42sFxs_O7_jurf3nqJFmsz5W5OIjaloY_Wdq0_Qbzs-2izuad_pzo34nW8BgU7nY7O6IxxaBtOIVV3ihuXWSXYq2hkOkWJkZ_bplU0x45m35IUV4jYfI4Qj7kVZO1IMJU5Fm_8xsI4v1jg8wuc5nB0Mxo80f-Xoycg5vV8YeyQV0ucM-8Oi4kJiikys2_z4hegqggFa5Bbeusf2vrY6M5u55ZW58yuq44ezgo82eMzygh6JYdZBuafIjtfnXl0gc54ipbgjzhrYdxVJerYiVQtMZg4fd38_dswXI7OUUcVq_uBWqlIdo0qkSFMcsrB7_fkSSR41g_ddQxgk_Zissuk91nWehgz5vrd3ZyQfIRX3nQkanhcb7o81ByRMS5dhf6poix2qduZRJbF7ZmYbdkO9x7a7d5qq-so8X97ap_osRlmOs2VX_JSQrtfo3XIog62" -H "Content-Type: application/json" -d '{
+  "message":{
+    "token":"eJoLFIbhHgCibFCpkbzmY6:APA91bGYO_hE6SSdbeZzIMffjR9mpTuMzuGTBCLe2ciEQN6mJkxtrl7U2HY1XXyXLkY-zmMemJy9WSxJNooKUnKGokN_kywcOvVX3tmB8bndZzp4rqCvjGQ4ab_WBm94Y4NJZ71NxGZu",
+    "notification":{
+      "title":"Hello111",
+      "body":"This is a text message!"
+    }
+  }
+}' https://fcm.googleapis.com/v1/projects/web-push-70b46/messages:send

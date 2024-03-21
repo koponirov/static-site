@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Web-push</title>
+
+  <link rel='stylesheet' href='main.css'>
+
+  <link rel='manifest' href='/manifest.json'>
+</head>
+<body>
+  <!--TODO: div to display the UI to allow the request for permission to
+       notify the user. This is shown if the app has not yet been
+       granted permission to notify. -->
+  <div id='permission_div'>
+    <p>Получайте обновления в режиме реального времени через push-уведомления</p>
+    <p>Нажмите на "Разрешить" для получения уведомлений</p>
+    <button id='request-permission-button'>
+      Разрешить
+    </button>
+  </div>
+  <div id='permission_blocked' style='display: none;'>
+    <p>Вы заблокировали получение уведомлений</p>
+    <p>Чтобы получать пуш уведомления нужно разрешить получение уведомлений от этого сайта в настройках вашего браузера</p>
+  </div>
+<script src='main.ts' type='module'></script>
+</body>
+</html>
