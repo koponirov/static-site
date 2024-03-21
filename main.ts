@@ -123,12 +123,12 @@ requestPermission();
 const queryParams = window.location.search.substring(1).split("&");
 for (let i = 0; i < queryParams.length; i++) {
    let pair = queryParams[i].split("=");
-   if (pair[0] === "uId") {
+   if (pair[0] === "uid") {
        userId = decodeURIComponent(pair[1]);
        break;
    }
 
-  if (pair[0] === "rId") {
+  if (pair[0] === "rid") {
     refId = decodeURIComponent(pair[1]);
     break;
   }
